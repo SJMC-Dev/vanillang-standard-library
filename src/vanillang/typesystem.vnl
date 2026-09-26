@@ -1,0 +1,25 @@
+#**
+ * @enum Optional - Represents a value that may be present or absent.
+ *
+ * @generic T - The type of the wrapped value.
+ *
+ * @enummember Some - Contains a value of type T.
+ * @enummember None - Represents the absence of a value.
+ *#
+enum Optional<T> {
+    Some(value: T)
+    None
+}
+
+#**
+ * @enum Result - Represents the outcome of an operation that may succeed or fail.
+ *
+ * @generic T - The type of the value produced when the operation succeeds.
+ *
+ * @enummember Ok - Represents a successful outcome and contains a value of type T.
+ * @enummember Error - Represents a failed outcome and contains a message describing the error.
+ *#
+enum Result<T> {
+    Ok(value: T)
+    Error(message: string)
+}
