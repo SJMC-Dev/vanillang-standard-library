@@ -25,13 +25,18 @@ enum Result<T> {
 }
 
 #**
- * @interface Iterator - Provides sequential access to elements in an iterable.
+ * @interface Iterator - Provides sequential access to elements in an iteration.
  *
  * @generic T - The type of the elements produced by the iterator.
  *
  * @method next() - Returns the next element in the iteration, or None if the iteration is complete.
  *#
 interface Iterator<T> {
+    #**
+     * @method next() - Returns the next element produced by the iterator.
+     *
+     * @return Optional<T> - The next element in the iteration, or None if the iteration is complete.
+     *#
     func next() -> T?
 }
 
@@ -43,5 +48,64 @@ interface Iterator<T> {
  * @method getIterator() - Returns an iterator over the elements.
  *#
 interface Iterable<T> {
+    #**
+     * @method getIterator() - Returns an iterator over elements of type T.
+     *
+     * @return Iterator<T> - An iterator over the elements.
+     *#
     func getIterator() -> Iterator<T>
+}
+
+#**
+ * @class Range - Represents a sequence of values from begin to end using a fixed step.
+ *
+ * @generic T - The type of the values in the range.
+ *
+ * @method getIterator() - Returns an iterator over the range.
+ * @method next() - Returns the next value in the range.
+ *#
+class Range<T> implements Iterable<T>, Iterator<T> {
+    private begin: T
+    private end: T
+    private step: T
+    private current: T
+
+    #**
+     * @constructor init(begin: T, end: T, step: T)
+     *
+     * @param begin - The first value in the range.
+     * @param end - The upper bound of the range.
+     * @param step - The increment applied after each value.
+     *#
+    init(begin: T, end: T, step: T) {
+        this.begin = begin
+        this.end = end
+        this.step = step
+        this.current = begin
+    }
+
+    #**
+     * @method getIterator() - Returns an iterator over the range.
+     *
+     * @return Range<T> - The range itself as an iterator.
+     *#
+    func getIterator() -> Range<T> {
+        return this
+    }
+
+    #**
+     * @method next() - Returns the next value in the range.
+     *
+     * @return Optional<T> - The next value in the range, or None if the iteration is complete.
+     *#
+    func next() -> T? {
+        if (current > end) {
+            return none
+        }
+
+        let ret = current
+        current += step
+
+        return ret
+    }
 }
