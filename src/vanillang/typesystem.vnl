@@ -23,3 +23,25 @@ enum Result<T> {
     Ok(value: T)
     Error(message: string)
 }
+
+#**
+ * @interface Iterator - Provides sequential access to elements in an iterable.
+ *
+ * @generic T - The type of the elements produced by the iterator.
+ *
+ * @method next() - Returns the next element in the iteration, or None if the iteration is complete.
+ *#
+interface Iterator<T> {
+    func next() -> T?
+}
+
+#**
+ * @interface Iterable - Represents a type whose elements can be iterated over.
+ *
+ * @generic T - The type of the elements produced during iteration.
+ *
+ * @method getIterator() - Returns an iterator over the elements.
+ *#
+interface Iterable<T> {
+    func getIterator() -> Iterator<T>
+}
